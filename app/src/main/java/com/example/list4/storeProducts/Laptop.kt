@@ -6,11 +6,11 @@ class Laptop(
     override var price: Double,
     override var productStatus: ProductStatus,
     override var stockQuantity: Int,
-    val GPU: String, val CPU : String, val storage: Int, val ram: String, val extra: String
+    val cpu: String, val gpu: String, val storage: Int, val ram: String, val extra: String
 ) : Product(){
 
     // purchase a product
-    override open fun purchase(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
+    override fun purchase(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
         val message = super.purchase(userId, productId, quantity, purchaseDate)
         if (message){
             println("Laptop $item bought by user $userId purchased successful")
@@ -19,7 +19,7 @@ class Laptop(
     }
 
     // return a product
-    override open fun returnProduct(userId: Int, productId: Int, returnDate: String): Boolean {
+    override fun returnProduct(userId: Int, productId: Int, returnDate: String): Boolean {
         val message = super.returnProduct(userId, productId, returnDate)
         if (message){
             println("User $userId returned the laptop $item")
