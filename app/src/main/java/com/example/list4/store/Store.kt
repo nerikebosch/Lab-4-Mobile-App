@@ -5,7 +5,6 @@ import com.example.list4.storeProducts.Product
 import com.example.list4.storeWorkers.Customer
 import com.example.list4.storeWorkers.OnlineUser
 import com.example.list4.storeWorkers.User
-import com.example.list4.storeWorkers.Worker
 
 class Store {
 
