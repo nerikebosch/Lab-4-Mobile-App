@@ -2,7 +2,6 @@ package com.example.list4.storeWorkers
 
 import com.example.list4.store.Store
 import com.example.list4.storeProducts.Product
-import com.example.list4.storeProducts.PurchaseRecord
 
 class Admin(
     id: Int,

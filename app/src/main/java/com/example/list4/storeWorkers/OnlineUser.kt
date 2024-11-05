@@ -8,7 +8,7 @@ abstract class OnlineUser(
     val name: String
 ) : User {
     // Protected property for holding purchase history
-    protected val purchaseHistory = mutableListOf<PurchaseRecord>()
+    val purchaseHistory = mutableListOf<PurchaseRecord>()
 
     // Implementation of viewing purchase history, common to all users
     override fun viewPurchaseHistory(): List<PurchaseRecord> = purchaseHistory
