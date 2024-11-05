@@ -23,7 +23,7 @@ class Store {
         return products.find { it.id == productId }
     }
 
-    // Method to remove a product by its ID
+    // Remove a product by its ID
     fun removeProduct(productId: Int, user: OnlineUser) {
         if (user is Admin || user is Worker) {
             val product = products.find { it.id == productId }
@@ -99,10 +99,11 @@ class Store {
                 println("Product with ID $productId not found.")
             }
         } else {
-            println("Permission denied: Only Admins or Employees can update products.")
+            println("Permission denied: Only Admins or Workers can update products.")
         }
     }
 
+    // List all products
     fun listAllProducts(): List<Product> {
         println("Listing all products (including out-of-stock):")
         products.forEach { product ->
@@ -121,5 +122,38 @@ class Store {
         }
     }
 
-    // Additional user and product management methods (registering users, updating product info, etc.)
+    // User Management
+
+    // Register a new user
+    fun registerUser(user: OnlineUser) {
+        users.add(user)
+        println("${user.name} registered successfully as ${user::class.simpleName}.")
+    }
+
+    // Remove a user
+    fun removeUser(userId: Int, requestingUser: OnlineUser) {
+        if (requestingUser is Admin) {
+            val user = users.find { it.id == userId }
+            if (user != null) {
+                users.remove(user)
+                println("User ${user.name} removed successfully by Admin ${requestingUser.name}.")
+            } else {
+                println("User with ID $userId not found.")
+            }
+        } else {
+            println("Permission denied: Only Admins can remove users.")
+        }
+    }
+
+    // List all users
+    fun listAllUsers() {
+        println("Listing all users:")
+        if (users.isEmpty()) {
+            println("No users registered.")
+        } else {
+            users.forEach { user ->
+                println("ID: ${user.id}, Name: ${user.name}, Type: ${user::class.simpleName}")
+            }
+        }
+    }
 }
