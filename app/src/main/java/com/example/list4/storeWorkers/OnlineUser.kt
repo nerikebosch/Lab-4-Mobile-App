@@ -5,7 +5,8 @@ import com.example.list4.storeProducts.PurchaseRecord
 
 abstract class OnlineUser(
     val id: Int,
-    val name: String
+    val name: String,
+    val email: String
 ) : User {
     // Protected property for holding purchase history
     val purchaseHistory = mutableListOf<PurchaseRecord>()

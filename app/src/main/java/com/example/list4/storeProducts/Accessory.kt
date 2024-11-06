@@ -6,7 +6,8 @@ class Accessory (
     override var price: Double,
     override var productStatus: ProductStatus,
     override var stockQuantity: Int,
-    val extra: String
+    val type: String,
+    val extra: String = ""
 ) : Product(){
 
     // purchase a product

@@ -1,11 +1,18 @@
 package com.example.list4.storeProducts
 /*
-    Abstract class Product that present product in online store has attributes:
+    Abstract class Product that present product in online store has (abstract) attributes:
     - Id
     - item (name)
     - price
     - quantity -> stockQuantity
     - product status
+    + List of purchase history
+
+    Methods:
+    - purchase product
+    - return product
+    - print the list of purchase history
+
     implement to sub-class:
     + Laptop
     + Phone
@@ -25,7 +32,9 @@ abstract class Product {
     open fun purchase(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
         val stockLeft = stockQuantity - quantity // check how many left in the stock
         return if (productStatus == ProductStatus.AVAILABLE && stockLeft > 0) {
+            // if product was available and still have some in stock then keep Status and update number of stock left
             stockQuantity = stockLeft
+
             val record = PurchaseRecord(
                 userId = userId,
                 productId = productId,
@@ -37,8 +46,10 @@ abstract class Product {
             purchaseHistory.add(record)
             true
         } else if (productStatus == ProductStatus.AVAILABLE && stockLeft == 0) {
+            // if product was available and purchased the last product in stock then make product now Out_of_stock with 0 product
             stockQuantity = stockLeft // = 0
             productStatus = ProductStatus.OUT_OF_STOCK
+
             val record = PurchaseRecord(
                 userId = userId,
                 productId = productId,
@@ -51,6 +62,7 @@ abstract class Product {
             println("Item $productId is now out of stock!")
             true
         } else {
+            // Product not available and nothing left in stock
             println("Item $productId is out of stock or not available!!")
             false
         }

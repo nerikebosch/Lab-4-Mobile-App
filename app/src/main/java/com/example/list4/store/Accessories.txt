@@ -1,0 +1,10 @@
+300,Iphone charger,36.9,AVAILABLE,40,lightning,super quick
+301,USB-C Cable,15.0,AVAILABLE,25,USB-C,durable
+302,Wireless Charger,45.0,OUT_OF_STOCK,0,Qi,fast charging
+303,Laptop Sleeve,25.0,AVAILABLE,30,15 inch,water-resistant
+304,Bluetooth Mouse,20.0,AVAILABLE,50,Wireless,ergonomic design
+305,Portable SSD,620.0,AVAILABLE,20,1 TB,shock resistant
+306,Sony headphone WH-1000XM4,958.0,AVAILABLE,15,Wireless,noise cancelling
+307,Webcam,40.0,AVAILABLE,10,HD,plug and play
+308,Power Bank,30.0,AVAILABLE,35,10000mAh,quick charge
+309,HDMI Cable,10.0,AVAILABLE,60,HDMI 2.0,high speed

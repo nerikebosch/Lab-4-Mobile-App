@@ -6,7 +6,7 @@ class Laptop(
     override var price: Double,
     override var productStatus: ProductStatus,
     override var stockQuantity: Int,
-    val cpu: String, val gpu: String, val storage: Int, val ram: String, val extra: String
+    val cpu: String, val gpu: String, val storage: String, val ram: String, val extra: String = ""
 ) : Product(){
 
     // purchase a product

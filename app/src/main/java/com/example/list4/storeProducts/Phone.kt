@@ -6,7 +6,7 @@ class Phone(
     override var price: Double,
     override var productStatus: ProductStatus,
     override var stockQuantity: Int,
-    val storage: Int, val cameraQuantity: String, val extra: String
+    val storage: String, val cameraQuality: String, val extra: String = ""
 ) : Product() {
 
     // purchase a product

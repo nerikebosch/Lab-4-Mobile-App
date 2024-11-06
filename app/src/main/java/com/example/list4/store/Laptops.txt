@@ -1,0 +1,4 @@
+100,Pavillion 15,2899.0,AVAILABLE,20,Intel core i5-1335u,Intel Iris Xe Graphics,SSD 512 GB,16 GB,Screen type: LED IPS
+101,Inspiron 14,1999.0,AVAILABLE,15,Intel core i7-1165G7,Intel Iris Xe Graphics,SSD 256 GB,8 GB,Screen type: FHD
+102,MacBook Pro 16,3499.0,AVAILABLE,0,Apple M1 Pro,Apple M1 Pro,SSD 1 TB,16 GB,Screen type: Retina
+103,ThinkPad X1 Carbon,2599.0,AVAILABLE,10,Intel core i7-1185G7,Intel Iris Xe Graphics,SSD 512 GB,16 GB,Screen type: FHD

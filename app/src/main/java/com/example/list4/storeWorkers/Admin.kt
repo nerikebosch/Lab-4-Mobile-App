@@ -1,46 +1,29 @@
 package com.example.list4.storeWorkers
 
 import com.example.list4.store.Store
-import com.example.list4.storeProducts.Product
+
 
 class Admin(
     id: Int,
     name: String,
-    val email: String
-) : OnlineUser(id, name) {
+    val email: String = ""
+) : StoreManager(id, name) {
 
     override fun viewProfile() {
         println("Admin Profile - ID: $id, Name: $name, Email: $email")
     }
 
-    override fun viewProducts(): List<Product> {
-        return Store.getAllProducts() // Admin sees all products, including out-of-stock items
+//    fun removeUserById(userId : Int) {
+//
+//    }
+
+    fun addStaff(staff: StoreManager, store: Store) {
+        store.workers.add(staff)
+        println("$name (Administrator) added worker ${staff.name} to the store")
     }
 
-    override fun purchaseProduct(product: Product, quantity: Int): Boolean {
-        println("Admins do not purchase products.")
-        return false
-    }
-
-    override fun returnProduct(productId: Int): Boolean {
-        println("Admins do not handle returns.")
-        return false
-    }
-
-    // Admin-specific methods for managing users and workers
-    fun addUser(user: User): Boolean {
-        return Store.addUser(user)
-    }
-
-    fun removeUser(userId: Int): Boolean {
-        return Store.removeUser(userId)
-    }
-
-    fun addWorker(worker: Worker): Boolean {
-        return Store.addUser(worker)
-    }
-
-    fun removeWorker(workerId: Int): Boolean {
-        return Store.removeUser(workerId)
+    fun removeStaff(staff: StoreManager, store: Store) {
+        store.workers.remove(staff)
+        println(println("$name (Administrator) removed worker ${staff.name} from the store"))
     }
 }

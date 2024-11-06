@@ -1,16 +1,15 @@
 package com.example.list4.store
 
 import com.example.list4.storeProducts.Product
-import com.example.list4.storeProducts.PurchaseRecord
 import com.example.list4.storeProducts.ProductStatus
 import com.example.list4.storeWorkers.Admin
 import com.example.list4.storeWorkers.OnlineUser
-import com.example.list4.storeWorkers.Customer
-import com.example.list4.storeWorkers.Worker
+import com.example.list4.storeWorkers.StoreManager
 
 class Store {
-    private val products = mutableListOf<Product>()
-    private val users = mutableListOf<OnlineUser>()
+    val products = mutableListOf<Product>()
+    val users = mutableListOf<OnlineUser>()
+    val workers = mutableListOf<StoreManager>()
 
     // Add a new product to the store
     fun addProduct(product: Product) {
@@ -19,87 +18,79 @@ class Store {
     }
 
     // Find product by ID
-    private fun findProductById(productId: Int): Product? {
+    fun findProductById(productId: Int): Product? {
         return products.find { it.id == productId }
     }
 
     // Remove a product by its ID
-    fun removeProduct(productId: Int, user: OnlineUser) {
-        if (user is Admin || user is Worker) {
-            val product = products.find { it.id == productId }
-            if (product != null) {
-                products.remove(product)
-                println("Product ${product.item} removed successfully by ${user.name}")
-            } else {
-                println("Product with ID $productId not found.")
-            }
+    fun removeProductById(productId: Int) {
+        val product = products.find { it.id == productId }
+        if (product != null) {
+            products.remove(product)
+            println("Product ${product.item} removed successfully")
         } else {
-            println("Permission denied: Only Admins or Workers can remove products.")
+            println("Product with ID $productId not found.")
         }
     }
 
-    // Purchase a product
-    fun purchaseProduct(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
-        val user = users.find { it.id == userId }
-        val product = findProductById(productId)
-
-        return if (user != null && user is Customer && product != null) {
-            if (product.purchase(userId, quantity, purchaseDate)) {
-                val purchaseRecord = PurchaseRecord(
-                    userId = userId,
-                    productId = productId,
-                    quantity = quantity,
-                    totalPrice = product.price * quantity,
-                    purchaseDate = purchaseDate,
-                    returnDate = null
-                )
-                user.purchaseHistory.add(purchaseRecord)
-                println("Purchase successful for Product ${product.item} by User ${user.name}.")
-                true
-            } else {
-                println("Purchase failed for Product ${product.item}.")
-                false
-            }
-        } else {
-            println("User or Product not found, or User is not authorized.")
-            false
-        }
-    }
-
-    // Return a product
-    fun returnProduct(userId: Int, productId: Int, returnDate: String): Boolean {
-        val user = users.find { it.id == userId }
-        val product = findProductById(productId)
-
-        return if (user != null && user is Customer && product != null) {
-            if (product.returnProduct(userId, productId, returnDate)) {
-                user.purchaseHistory.find { it.productId == productId && it.returnDate == null }?.returnDate = returnDate
-                println("Return successful for Product ${product.item} by User ${user.name}.")
-                true
-            } else {
-                println("Return failed for Product ${product.item}.")
-                false
-            }
-        } else {
-            println("User or Product not found, or User is not authorized.")
-            false
-        }
-    }
+//    // Purchase a product
+//    fun purchaseProduct(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
+//        val user = users.find { it.id == userId }
+//        val product = findProductById(productId)
+//
+//        return if (user != null && user is Customer && product != null) {
+//            if (product.purchase(userId, quantity, purchaseDate) ) {
+//                val purchaseRecord = PurchaseRecord(
+//                    userId = userId,
+//                    productId = productId,
+//                    quantity = quantity,
+//                    totalPrice = product.price * quantity,
+//                    purchaseDate = purchaseDate,
+//                    returnDate = null
+//                )
+//                user.purchaseHistory.add(purchaseRecord)
+//                println("Purchase successful for Product ${product.item} by User ${user.name}.")
+//                true
+//            } else {
+//                println("Purchase failed for Product ${product.item}.")
+//                false
+//            }
+//        } else {
+//            println("User or Product not found, or User is not authorized.")
+//            false
+//        }
+//    }
+//
+//    // Return a product
+//    fun returnProduct(userId: Int, productId: Int, returnDate: String): Boolean {
+//        val user = users.find { it.id == userId }
+//        val product = findProductById(productId)
+//
+//        return if (user != null && user is Customer && product != null) {
+//            if (product.returnProduct(userId, productId, returnDate)) {
+//                user.purchaseHistory.find { it.productId == productId && it.returnDate == null }?.returnDate = returnDate
+//                println("Return successful for Product ${product.item} by User ${user.name}.")
+//                true
+//            } else {
+//                println("Return failed for Product ${product.item}.")
+//                false
+//            }
+//        } else {
+//            println("User or Product not found, or User is not authorized.")
+//            false
+//        }
+//    }
 
     // Update product information
-    fun updateProduct(productId: Int, newPrice: Double, newQuantity: Int, user: OnlineUser) {
-        if (user is Admin || user is Worker) {
-            val product = findProductById(productId)
-            if (product != null) {
-                product.price = newPrice
-                product.stockQuantity = newQuantity
-                product.productStatus = if (newQuantity > 0) ProductStatus.AVAILABLE else ProductStatus.OUT_OF_STOCK
-                println("Product ${product.item} updated successfully by ${user.name}")
-            } else {
-                println("Product with ID $productId not found.")
-            }
+    fun updateProduct(productId: Int, newPrice: Double, newQuantity: Int) {
+        val product = findProductById(productId)
+        if (product != null) {
+            product.price = newPrice
+            product.stockQuantity = newQuantity
+            product.productStatus = if (newQuantity > 0) ProductStatus.AVAILABLE else ProductStatus.OUT_OF_STOCK
+            println("Product ${product.item} updated successfully")
         } else {
-            println("Permission denied: Only Admins or Workers can update products.")
+            println("Product with ID $productId not found.")
         }
     }
 
@@ -122,8 +113,6 @@ class Store {
         }
     }
 
-    // User Management
-
     // Register a new user
     fun registerUser(user: OnlineUser) {
         users.add(user)
@@ -131,7 +120,7 @@ class Store {
     }
 
     // Remove a user
-    fun removeUser(userId: Int, requestingUser: OnlineUser) {
+    fun removeUserById(userId: Int, requestingUser: StoreManager) {
         if (requestingUser is Admin) {
             val user = users.find { it.id == userId }
             if (user != null) {
@@ -152,8 +141,21 @@ class Store {
             println("No users registered.")
         } else {
             users.forEach { user ->
-                println("ID: ${user.id}, Name: ${user.name}, Type: ${user::class.simpleName}")
+                println("ID: ${user.id}, Name: ${user.name}, Email: ${user.email}")
             }
         }
     }
+
+    // List all workers
+    fun listAllWorkers() {
+        println("Listing all staffs:")
+        if (workers.isEmpty()) {
+            println("No users registered.")
+        } else {
+            workers.forEach { worker ->
+                println("ID: ${worker.id}, Name: ${worker.name}, Type: ${worker::class.simpleName}")
+            }
+        }
+    }
+
 }
