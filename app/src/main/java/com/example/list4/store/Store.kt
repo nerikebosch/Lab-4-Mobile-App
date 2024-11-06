@@ -33,54 +33,6 @@ class Store {
         }
     }
 
-//    // Purchase a product
-//    fun purchaseProduct(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
-//        val user = users.find { it.id == userId }
-//        val product = findProductById(productId)
-//
-//        return if (user != null && user is Customer && product != null) {
-//            if (product.purchase(userId, quantity, purchaseDate) ) {
-//                val purchaseRecord = PurchaseRecord(
-//                    userId = userId,
-//                    productId = productId,
-//                    quantity = quantity,
-//                    totalPrice = product.price * quantity,
-//                    purchaseDate = purchaseDate,
-//                    returnDate = null
-//                )
-//                user.purchaseHistory.add(purchaseRecord)
-//                println("Purchase successful for Product ${product.item} by User ${user.name}.")
-//                true
-//            } else {
-//                println("Purchase failed for Product ${product.item}.")
-//                false
-//            }
-//        } else {
-//            println("User or Product not found, or User is not authorized.")
-//            false
-//        }
-//    }
-//
-//    // Return a product
-//    fun returnProduct(userId: Int, productId: Int, returnDate: String): Boolean {
-//        val user = users.find { it.id == userId }
-//        val product = findProductById(productId)
-//
-//        return if (user != null && user is Customer && product != null) {
-//            if (product.returnProduct(userId, productId, returnDate)) {
-//                user.purchaseHistory.find { it.productId == productId && it.returnDate == null }?.returnDate = returnDate
-//                println("Return successful for Product ${product.item} by User ${user.name}.")
-//                true
-//            } else {
-//                println("Return failed for Product ${product.item}.")
-//                false
-//            }
-//        } else {
-//            println("User or Product not found, or User is not authorized.")
-//            false
-//        }
-//    }
-
     // Update product information
     fun updateProduct(productId: Int, newPrice: Double, newQuantity: Int) {
         val product = findProductById(productId)
