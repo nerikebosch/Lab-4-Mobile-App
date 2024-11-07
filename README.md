@@ -1,5 +1,5 @@
 # Simple Online Management Store
-
+    contributors: Nerike Bosch, Quang Pham
 ## Main goal
 From _Mobile application development 2024/2025_, List 4, by Głąba Paweł
 
