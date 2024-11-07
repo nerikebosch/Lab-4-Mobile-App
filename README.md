@@ -25,7 +25,7 @@ purchase history.
 * storeProducts
 * storeWorkers
 
-## store
+### store
 
 Class **store** has :
 * Attributes
