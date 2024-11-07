@@ -27,9 +27,37 @@ purchase history.
 
 ## store
 
-Class **Store** has :
+Class **store** has :
 * Attributes
     * **products**: list of store's product
     * **users**: list of store's users/customers
     * **workers**: list of store's workers/staffs
 * Method/Function
+    * add, find, remove, update products
+    * list (available) products
+    * register, remove users
+    * list all users and wokers
+
+### storeProducts
+To manage and modify the products in the store
+
+Abstract class **Product** has
+* Attributes:
+    * id
+    * item (name of the product)
+    * price
+    * stockQuantity
+    * productStatus (Handle by enum class ProductStatus)
+* Subclass product categorize:
+    * Laptop
+    * Phone
+    * Accessory
+* enum class Productstatus
+    * Available
+    * Out of stock
+* data class PurchaseRecord
+
+* Method:
+    * tracking the purchase history
+    * purchase product - record to purchase history
+    * return product - record to purchase history
