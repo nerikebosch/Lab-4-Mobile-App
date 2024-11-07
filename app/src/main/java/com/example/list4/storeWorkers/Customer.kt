@@ -9,10 +9,11 @@ class Customer(
     id: Int,
     name: String,
     email: String,
-    val address: String = ""
+    val address: String = "",
+    private val store: Store
 ) : OnlineUser(id, name, email) {
 
-    private val store = Store()
+
 
     override fun viewProfile() {
         println("Customer Profile - ID: $id, Name: $name, Email: $email, Address: $address")
@@ -36,8 +37,31 @@ class Customer(
                 returnDate = null
             )
             purchaseHistory.add(record)
+            store.addPurchase(record)
         }
         return success
+    }
+
+    fun purchaseProductById(productId: Int, quantity: Int): Boolean {
+        val product = store.findProductById(productId)
+        return if (product != null) {
+            val purchaseDate = Date().toString()
+            val success = product.purchase(id, productId, quantity, purchaseDate)
+            if (success) {
+                val record = PurchaseRecord(
+                    userId = id,
+                    productId = productId,
+                    quantity = quantity,
+                    totalPrice = product.price * quantity,
+                    purchaseDate = purchaseDate,
+                    returnDate = null )
+                purchaseHistory.add(record) // Add purchase to the store's purchased list
+             store.addPurchase(record) }
+            success }
+        else {
+            println("Purchase failed: Product with ID $productId not found.")
+            false
+        }
     }
 
     override fun returnProduct(productId: Int): Boolean {

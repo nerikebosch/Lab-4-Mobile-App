@@ -48,13 +48,15 @@ fun main() {
         id = 100,
         name = "mrA",
         email = "AAhahaayy@gmail.com",
-        address = "Wroclaw"
+        address = "Wroclaw",
+        store = store
     )
     val customer2 = Customer(
         id = 102,
         name = "online-register",
         email = "Auto_generated-email@gmail.com",
-        address = "someWhere"
+        address = "someWhere",
+        store = store
     )
     // customer added by staff
     staff.addUser(customer1, store)
@@ -64,10 +66,14 @@ fun main() {
     println(" ------------------ ")
 
     println("\tCustomers buy something")
-    val product1 = store.findProductById(200)
-    if (product1 != null) {
-        customer1.purchaseProduct(product1, 1)
+    customer1.purchaseProductById(200, 1)
+
+    val product2 = store.findProductById(101)
+    if (product2 != null) {
+        customer2.purchaseProduct(product2, 1)
     }
+    println("\nPurchased history:")
+    store.listAllPurchasedProducts()
 
 }
 

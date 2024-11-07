@@ -2,6 +2,7 @@ package com.example.list4.store
 
 import com.example.list4.storeProducts.Product
 import com.example.list4.storeProducts.ProductStatus
+import com.example.list4.storeProducts.PurchaseRecord
 import com.example.list4.storeWorkers.Admin
 import com.example.list4.storeWorkers.OnlineUser
 import com.example.list4.storeWorkers.StoreManager
@@ -10,6 +11,8 @@ class Store {
     val products = mutableListOf<Product>()
     val users = mutableListOf<OnlineUser>()
     val workers = mutableListOf<StoreManager>()
+    val purchasedProducts = mutableListOf<PurchaseRecord>()
+
 
     // Add a new product to the store
     fun addProduct(product: Product) {
@@ -39,7 +42,8 @@ class Store {
         if (product != null) {
             product.price = newPrice
             product.stockQuantity = newQuantity
-            product.productStatus = if (newQuantity > 0) ProductStatus.AVAILABLE else ProductStatus.OUT_OF_STOCK
+            product.productStatus =
+                if (newQuantity > 0) ProductStatus.AVAILABLE else ProductStatus.OUT_OF_STOCK
             println("Product ${product.item} updated successfully")
         } else {
             println("Product with ID $productId not found.")
@@ -58,11 +62,12 @@ class Store {
     // List all available products
     fun listAvailableProducts(): List<Product> {
         println("Listing all available products:")
-        return products.filter { it.productStatus == ProductStatus.AVAILABLE }.also { availableProducts ->
-            availableProducts.forEach { product ->
-                println("ID: ${product.id}, Name: ${product.item}, Price: ${product.price}, Quantity: ${product.stockQuantity}")
+        return products.filter { it.productStatus == ProductStatus.AVAILABLE }
+            .also { availableProducts ->
+                availableProducts.forEach { product ->
+                    println("ID: ${product.id}, Name: ${product.item}, Price: ${product.price}, Quantity: ${product.stockQuantity}")
+                }
             }
-        }
     }
 
     // Register a new user
@@ -110,4 +115,24 @@ class Store {
         }
     }
 
+    // purchased product
+    // Method for purchasing a product
+    fun addPurchase(record: PurchaseRecord) {
+        purchasedProducts.add(record)
+    }
+
+    // List all purchased products
+    fun listAllPurchasedProducts() {
+        println("Listing all purchased products:")
+        if (purchasedProducts.isEmpty()) {
+        println("No products have been purchased.")
+        } else {
+        purchasedProducts.forEach { record ->
+            println("User ID: ${record.userId}, " +
+                    "Product ID: ${record.productId}, " +
+                    "Quantity: ${record.quantity}, " +
+                    "Total Price: ${record.totalPrice}, " +
+                    "Purchase Date: ${record.purchaseDate}")}
+        }
+    }
 }
