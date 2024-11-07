@@ -32,12 +32,14 @@ Class **store** has :
     * **products**: list of store's product
     * **users**: list of store's users/customers
     * **workers**: list of store's workers/staffs
+    * **purchasedProducts**: list of store's purchased records
 * Method/Function
     * add, find, remove, update products
     * list (available) products
     * register, remove users
     * list all users and wokers
-
+    * add a purchased (made by customer)
+    * list all purchased records
 ### storeProducts
 To manage and modify the products in the store
 
