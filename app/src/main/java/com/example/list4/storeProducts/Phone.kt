@@ -13,8 +13,8 @@ class Phone(
     override open fun purchase(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
         val message = super.purchase(userId, productId, quantity, purchaseDate)
         if (message){
-            println("Phone $item bought by user $userId purchased successful")
-        } else println("Phone $item bought by user $userId NOT purchased successful")
+            println("Phone $item bought by user with id $userId purchased successful")
+        } else println("Phone $item bought by user with id $userId NOT purchased successful")
         return message
     }
 

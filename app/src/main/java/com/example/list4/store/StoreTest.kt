@@ -8,8 +8,6 @@ import com.example.list4.storeWorkers.Admin
 import com.example.list4.storeWorkers.Customer
 import com.example.list4.storeWorkers.Staff
 import java.io.File
-import kotlin.io.path.Path
-import java.nio.file.Paths
 
 fun main() {
     val storeTest = StoreTest()
@@ -64,6 +62,12 @@ fun main() {
     store.registerUser(customer2)
     store.listAllUsers()
     println(" ------------------ ")
+
+    println("\tCustomers buy something")
+    val product1 = store.findProductById(200)
+    if (product1 != null) {
+        customer1.purchaseProduct(product1, 1)
+    }
 
 }
 

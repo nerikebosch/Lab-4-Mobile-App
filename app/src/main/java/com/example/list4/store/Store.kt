@@ -100,7 +100,7 @@ class Store {
 
     // List all workers
     fun listAllWorkers() {
-        println("Listing all staffs:")
+        println("Listing all staff:")
         if (workers.isEmpty()) {
             println("No users registered.")
         } else {
