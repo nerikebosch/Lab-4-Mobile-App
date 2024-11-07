@@ -7,25 +7,45 @@ import com.example.list4.storeWorkers.Admin
 import com.example.list4.storeWorkers.OnlineUser
 import com.example.list4.storeWorkers.StoreManager
 
+/**
+ * Manages store operations including products, users, and purchase records.
+ */
 class Store {
+    /** List of products available in the store */
     val products = mutableListOf<Product>()
+
+    /** List of registered users in the store */
     val users = mutableListOf<OnlineUser>()
+
+    /** List of workers (store managers, staff) in the store */
     val workers = mutableListOf<StoreManager>()
+
+    /** List of all purchase records in the store */
     val purchasedProducts = mutableListOf<PurchaseRecord>()
 
 
-    // Add a new product to the store
+    /**
+     * Adds a new product to the store inventory.
+     * @param product The product to be added
+     */
     fun addProduct(product: Product) {
         products.add(product)
         println("Product ${product.item} added successfully.")
     }
 
-    // Find product by ID
+    /**
+     * Finds a product by its ID.
+     * @param productId The ID of the product to find
+     * @return The product if found, or null if not found
+     */
     fun findProductById(productId: Int): Product? {
         return products.find { it.id == productId }
     }
 
-    // Remove a product by its ID
+    /**
+     * Removes a product by its ID.
+     * @param productId The ID of the product to remove
+     */
     fun removeProductById(productId: Int) {
         val product = products.find { it.id == productId }
         if (product != null) {
@@ -36,7 +56,12 @@ class Store {
         }
     }
 
-    // Update product information
+    /**
+     * Updates the details of a product, including price and stock quantity.
+     * @param productId The ID of the product to update
+     * @param newPrice The new price of the product
+     * @param newQuantity The new stock quantity of the product
+     */
     fun updateProduct(productId: Int, newPrice: Double, newQuantity: Int) {
         val product = findProductById(productId)
         if (product != null) {
@@ -50,7 +75,10 @@ class Store {
         }
     }
 
-    // List all products
+    /**
+     * Lists all products, including out-of-stock items.
+     * @return List of all products
+     */
     fun listAllProducts(): List<Product> {
         println("Listing all products (including out-of-stock):")
         products.forEach { product ->
@@ -59,7 +87,10 @@ class Store {
         return products
     }
 
-    // List all available products
+    /**
+     * Lists all available products in stock.
+     * @return List of available products
+     */
     fun listAvailableProducts(): List<Product> {
         println("Listing all available products:")
         return products.filter { it.productStatus == ProductStatus.AVAILABLE }
@@ -70,13 +101,20 @@ class Store {
             }
     }
 
-    // Register a new user
+    /**
+     * Registers a new user to the store.
+     * @param user The user to be registered
+     */
     fun registerUser(user: OnlineUser) {
         users.add(user)
         println("${user.name} registered successfully as ${user::class.simpleName}.")
     }
 
-    // Remove a user
+    /**
+     * Removes a user from the store by their ID. Only an Admin can perform this action.
+     * @param userId The ID of the user to be removed
+     * @param requestingUser The Admin requesting the user removal
+     */
     fun removeUserById(userId: Int, requestingUser: StoreManager) {
         if (requestingUser is Admin) {
             val user = users.find { it.id == userId }
@@ -91,7 +129,9 @@ class Store {
         }
     }
 
-    // List all users
+    /**
+     * Lists all registered users in the store.
+     */
     fun listAllUsers() {
         println("Listing all users:")
         if (users.isEmpty()) {
@@ -103,7 +143,9 @@ class Store {
         }
     }
 
-    // List all workers
+    /**
+     * Lists all workers in the store.
+     */
     fun listAllWorkers() {
         println("Listing all staff:")
         if (workers.isEmpty()) {
@@ -115,13 +157,17 @@ class Store {
         }
     }
 
-    // purchased product
-    // Method for purchasing a product
+    /**
+     * Adds a purchase record to the list of purchased products.
+     * @param record The purchase record to add
+     */
     fun addPurchase(record: PurchaseRecord) {
         purchasedProducts.add(record)
     }
 
-    // List all purchased products
+    /**
+     * Lists all purchased products with details.
+     */
     fun listAllPurchasedProducts() {
         println("Listing all purchased products:")
         if (purchasedProducts.isEmpty()) {

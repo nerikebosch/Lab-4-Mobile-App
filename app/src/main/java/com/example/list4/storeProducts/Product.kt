@@ -18,6 +18,15 @@ package com.example.list4.storeProducts
     + Phone
     + Accessory
  */
+
+/**
+ * Represents a product in the store with details including item name, price, quantity, and status.
+ * @property id Unique identifier of the product
+ * @property item Name of the product
+ * @property price Price of the product
+ * @property stockQuantity Available stock quantity of the product
+ * @property productStatus Current availability status of the product
+ */
 abstract class Product {
     abstract val id : Int
     abstract val item : String
@@ -28,7 +37,14 @@ abstract class Product {
     // List of products have been purchased
     val purchaseHistory = mutableListOf<PurchaseRecord>()
 
-    // purchase a product
+    /**
+     * Attempts to purchase the specified quantity of the product.
+     * @param userId ID of the user making the purchase
+     * @param productId ID of the product being purchased
+     * @param quantity Quantity to be purchased
+     * @param purchaseDate Date of the purchase
+     * @return True if purchase is successful, otherwise false
+     */
     open fun purchase(userId: Int, productId: Int, quantity: Int, purchaseDate: String): Boolean {
         val stockLeft = stockQuantity - quantity // check how many left in the stock
         return if (productStatus == ProductStatus.AVAILABLE && stockLeft > 0) {
@@ -68,7 +84,13 @@ abstract class Product {
         }
     }
 
-    // return a product
+    /**
+     * Processes the return of the product by a user.
+     * @param userId ID of the user returning the product
+     * @param productId ID of the product being returned
+     * @param returnDate Date of the return
+     * @return True if return is successful, otherwise false
+     */
     open fun returnProduct(userId: Int, productId: Int, returnDate: String): Boolean {
         // Return the record that being return or false if no such record exists.
         val purchasedRecord = purchaseHistory.lastOrNull {it.userId == userId && it.productId == productId}
